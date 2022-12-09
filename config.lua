@@ -23,6 +23,7 @@ lvim.keys.normal_mode["<leader>t"] = ":TestNearest<cr>"
 lvim.keys.normal_mode["<leader>T"] = ":TestFile<cr>"
 lvim.keys.normal_mode["<leader>o"] = ":Other<cr>"
 lvim.keys.normal_mode["<leader>av"] = ":OtherVSplit<cr>"
+lvim.keys.normal_mode["<leader>j"] = ":AnyJump<cr>"
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
@@ -283,6 +284,7 @@ lvim.plugins = {
   },
   { 'tpope/vim-rhubarb' },
   { 'terryma/vim-multiple-cursors' },
+  { 'pechorin/any-jump.vim' },
   {
     "tpope/vim-fugitive",
     cmd = {
