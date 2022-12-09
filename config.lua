@@ -282,6 +282,7 @@ lvim.plugins = {
     end,
   },
   { 'tpope/vim-rhubarb' },
+  { 'terryma/vim-multiple-cursors' },
   {
     "tpope/vim-fugitive",
     cmd = {
