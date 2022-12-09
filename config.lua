@@ -281,6 +281,7 @@ lvim.plugins = {
       require("spectre").setup()
     end,
   },
+  { 'tpope/vim-rhubarb' },
   {
     "tpope/vim-fugitive",
     cmd = {
@@ -307,6 +308,7 @@ lvim.plugins = {
     event = "InsertEnter",
   },
   { "tpope/vim-repeat" },
+  { "tpope/vim-endwise" },
   {
     "tpope/vim-surround",
     -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
@@ -336,7 +338,8 @@ lvim.plugins = {
     }
   },
   { "luisiacc/gruvbox-baby" },
-  { "RishabhRD/gruvy" }
+  { "RishabhRD/gruvy" },
+  { "kristijanhusak/vim-create-pr" }
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
