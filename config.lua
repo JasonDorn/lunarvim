@@ -19,6 +19,10 @@ lvim.colorscheme = "gruvbox-baby"
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<leader>t"] = ":TestNearest<cr>"
+lvim.keys.normal_mode["<leader>T"] = ":TestFile<cr>"
+lvim.keys.normal_mode["<leader>o"] = ":Other<cr>"
+lvim.keys.normal_mode["<leader>av"] = ":OtherVSplit<cr>"
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
@@ -164,7 +168,99 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- Additional Plugins
 lvim.plugins = {
-  { 'klen/nvim-test' },
+  { "rgroli/other.nvim",
+    config = function()
+      require("other-nvim").setup({
+        mappings = {
+          -- builtin mappings
+          "rails",
+          -- custom mapping
+          {
+            pattern = "/(.*)/(.*)/.*.jsx$",
+            target = {
+              {
+                target = "/%1/%2/%2.test.jsx",
+                context = "test"
+              },
+              {
+                target = "/%1/%2/%2.test.js",
+                context = "test"
+              }
+            }
+          },
+          {
+            pattern = "/(.*)/(.*)/.*.js$",
+            target = {
+              {
+                target = "/%1/%2/%2.test.jsx",
+                context = "test"
+              },
+              {
+                target = "/%1/%2/%2.test.js",
+                context = "test"
+              }
+            }
+          }
+        },
+        transformers = {
+          -- defining a custom transformer
+          lowercase = function(inputString)
+            return inputString:lower()
+          end
+        },
+        style = {
+          -- How the plugin paints its window borders
+          -- Allowed values are none, single, double, rounded, solid and shadow
+          border = "solid",
+
+          -- Column seperator for the window
+          seperator = "|",
+
+          -- width of the window in percent. e.g. 0.5 is 50%, 1.0 is 100%
+          width = 0.7,
+
+          -- min height in rows.
+          -- when more columns are needed this value is extended automatically
+          minHeight = 2
+        },
+      })
+    end,
+  },
+  { 'klen/nvim-test',
+    config = function()
+      require('nvim-test').setup {
+        run = true, -- run tests (using for debug)
+        commands_create = true, -- create commands (TestFile, TestLast, ...)
+        filename_modifier = ":.", -- modify filenames before tests run(:h filename-modifiers)
+        silent = false, -- less notifications
+        term = "terminal", -- a terminal to run ("terminal"|"toggleterm")
+        termOpts = {
+          direction = "horizontal", -- terminal's direction ("horizontal"|"vertical"|"float")
+          width = 96, -- terminal's width (for vertical|float)
+          height = 24, -- terminal's height (for horizontal|float)
+          go_back = false, -- return focus to original window after executing
+          stopinsert = "auto", -- exit from insert mode (true|false|"auto")
+          keep_one = true, -- keep only one terminal for testing
+        },
+        runners = { -- setup tests runners
+          cs = "nvim-test.runners.dotnet",
+          go = "nvim-test.runners.go-test",
+          haskell = "nvim-test.runners.hspec",
+          javascriptreact = "nvim-test.runners.jest",
+          javascript = "nvim-test.runners.jest",
+          lua = "nvim-test.runners.busted",
+          python = "nvim-test.runners.pytest",
+          ruby = "nvim-test.runners.rspec",
+          rust = "nvim-test.runners.cargo-test",
+          typescript = "nvim-test.runners.jest",
+          typescriptreact = "nvim-test.runners.jest",
+        }
+      }
+      require('nvim-test.runners.rspec'):setup {
+        command = "bin/rspec", -- a command to run the test runner
+      }
+    end,
+  },
   {
     "phaazon/hop.nvim",
     event = "BufRead",
