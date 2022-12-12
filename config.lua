@@ -10,7 +10,7 @@ an executable
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save.enabled = true
+lvim.format_on_save.enabled = false
 lvim.colorscheme = "gruvbox-baby"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -24,6 +24,9 @@ lvim.keys.normal_mode["<leader>T"] = ":TestFile<cr>"
 lvim.keys.normal_mode["<leader>o"] = ":Other<cr>"
 lvim.keys.normal_mode["<leader>av"] = ":OtherVSplit<cr>"
 lvim.keys.normal_mode["<leader>j"] = ":AnyJump<cr>"
+vim.cmd [[
+  au BufWrite * :Autoformat
+]]
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
@@ -342,7 +345,8 @@ lvim.plugins = {
   },
   { "luisiacc/gruvbox-baby" },
   { "RishabhRD/gruvy" },
-  { "kristijanhusak/vim-create-pr" }
+  { "kristijanhusak/vim-create-pr" },
+  { "vim-autoformat/vim-autoformat" }
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
