@@ -10,7 +10,7 @@ an executable
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save.enabled = false
+lvim.format_on_save.enabled = true
 lvim.colorscheme = "gruvbox-baby"
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -24,9 +24,9 @@ lvim.keys.normal_mode["<leader>T"] = ":TestFile<cr>"
 lvim.keys.normal_mode["<leader>o"] = ":Other<cr>"
 lvim.keys.normal_mode["<leader>av"] = ":OtherVSplit<cr>"
 lvim.keys.normal_mode["<leader>j"] = ":AnyJump<cr>"
-vim.cmd [[
-  au BufWrite * :Autoformat
-]]
+-- vim.cmd [[
+--   au BufWrite * :Autoformat
+-- ]]
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
@@ -151,7 +151,13 @@ lvim.builtin.treesitter.highlight.enable = true
 --     filetypes = { "typescript", "typescriptreact" },
 --   },
 -- }
-
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  {
+    command = "prettier",
+    filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact", "javascript.jsx", "typescript.tsx" },
+  },
+}
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
 -- linters.setup {
