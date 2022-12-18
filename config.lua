@@ -24,9 +24,6 @@ lvim.keys.normal_mode["<leader>T"] = ":TestFile<cr>"
 lvim.keys.normal_mode["<leader>o"] = ":Other<cr>"
 lvim.keys.normal_mode["<leader>av"] = ":OtherVSplit<cr>"
 lvim.keys.normal_mode["<leader>j"] = ":AnyJump<cr>"
--- vim.cmd [[
---   au BufWrite * :Autoformat
--- ]]
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
@@ -269,15 +266,6 @@ lvim.plugins = {
       require('nvim-test.runners.rspec'):setup {
         command = "bin/rspec", -- a command to run the test runner
       }
-    end,
-  },
-  {
-    "phaazon/hop.nvim",
-    event = "BufRead",
-    config = function()
-      require("hop").setup()
-      vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
-      vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
     end,
   },
   {
